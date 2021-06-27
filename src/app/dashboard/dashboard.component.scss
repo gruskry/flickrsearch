@@ -1,0 +1,17 @@
+.cards-wrap {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+}
+
+p.no-img {
+    font-size: 16px;
+    font-weight: 500;
+    text-align: center;
+}
+
+::ng-deep .ngx-pagination .current {
+    background: #673ab7 !important;
+  }
+
+  

@@ -1,0 +1,61 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  align-content: center;
+  background-color: #673ab7;
+  color: white;
+  
+  
+    h1 {
+      margin: 10px;
+      text-align: center;
+    } 
+
+    .mat-icon {
+      margin: 10px;
+    }
+}
+
+.container {
+    height: 100vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: stretch;
+    background-color: #fff;
+    box-sizing: border-box;
+    border-top: 4px solid #9361eb;
+
+
+    .sidenav-container {
+        display: flex;
+        width: 100%;
+  
+        &__menu {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          flex-direction: column;
+          padding-top: 60px;
+          width: 220px;
+          border-right: 1px solid #eee;
+        }
+      }
+  
+      .mat-drawer-container {
+        width: 100vw;
+        margin: 5px auto;
+      }
+
+      button[mat-raised-button]{
+          width: 100%;
+          display: block;
+          margin: 0px auto 10px;
+      }
+}
+
+.active-link {
+  background-color: #673ab7;
+  color: #fff;
+  transition: .3s linear;
+}

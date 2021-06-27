@@ -1,0 +1,9 @@
+<mat-card class="mat-card">
+  <mat-card-content>
+    <img src="https://live.staticflickr.com/{{item.server}}/{{item.id}}_{{item.secret}}.jpg" width="100%" height="200px">
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-raised-button color="primary" (click)='saveToLocalStorage()'>Save</button>
+  </mat-card-actions>
+  <p class="tags-photo">{{item.title}}</p>
+</mat-card>

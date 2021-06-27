@@ -1,0 +1,26 @@
+<header class="header">
+  <h1>Image Finder</h1>
+    <mat-icon>account_circle</mat-icon> 
+</header>
+
+<div class="container">
+  <mat-drawer-container class="container-sidenav" autosize>
+    <mat-drawer #drawer class="container=sidenav-content" mode="side" [disableClose]="false" [opened]="true">
+      <button mat-raised-button routerLink="/dashboard" routerLinkActive="active-link">Dashboard</button>
+      <button mat-raised-button routerLink="/bookmarks" routerLinkActive="active-link">Storage</button>
+      <app-menu></app-menu>
+    </mat-drawer>
+   
+    <div class="example-sidenav-content">
+      
+      <router-outlet></router-outlet>
+    </div>
+  
+  </mat-drawer-container>
+</div>
+
+<footer>
+  <span>Copyrights</span>
+</footer>
+
+

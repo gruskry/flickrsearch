@@ -1,0 +1,9 @@
+<app-search (keywordEmmiter)=callRequest($event)></app-search>
+<p class="no-img" *ngIf="!this.arrayOfPhotos[0]">No images here. Please send request</p>
+<pagination-controls *ngIf="this.arrayOfPhotos[0]" [autoHide]='true' [maxSize]="7" (pageChange)="page = $event"  ></pagination-controls>
+<div class="cards-wrap">
+    <div class="card" *ngFor="let item of arrayOfPhotos | paginate: { currentPage: page, itemsPerPage: 10, totalItems: totalLengthArray};" >
+        <app-card [item]=item></app-card>
+    </div>
+</div>
+

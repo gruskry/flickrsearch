@@ -1,0 +1,25 @@
+.tags-photo {
+    width: 300px;
+    text-overflow: hidden;
+    overflow: hidden;
+}
+
+.mat-card {
+    margin: 10px;
+    justify-content: space-between;
+    border: 1px solid grey;
+    max-height: 300px;
+    width: 18vw;
+    text-overflow: hidden;
+    overflow: hidden;
+ }
+
+@media (max-width: 500px) {
+    .mat-card {
+        width: 60vw;
+
+        img {
+            width: 100% !important;
+        }
+    }
+}

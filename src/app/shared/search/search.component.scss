@@ -1,0 +1,25 @@
+.search-block {
+    display: flex;
+    align-content: center;
+    justify-content: space-around;
+    
+  mat-form-field {
+    margin: 5px 20px;
+    width:80%;
+
+    .search-button {
+      width: 50px;
+      height: 50px;
+      justify-content: center;
+      align-content: center;
+      margin: 20px;
+    
+      .search-button-icon{
+        text-align: center;
+        vertical-align: baseline;
+      }
+    }
+  }
+}
+
+
