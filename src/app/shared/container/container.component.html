@@ -6,8 +6,14 @@
 <div class="container">
   <mat-drawer-container class="container-sidenav" autosize>
     <mat-drawer #drawer class="container=sidenav-content" mode="side" [disableClose]="false" [opened]="true">
-      <button mat-raised-button routerLink="/dashboard" routerLinkActive="active-link">Dashboard</button>
-      <button mat-raised-button routerLink="/bookmarks" routerLinkActive="active-link">Storage</button>
+      <div class="menu-link-container" routerLinkActive="active-link">
+        <mat-icon>dashboard</mat-icon> 
+        <a routerLink="/dashboard" >Dashboard</a>  
+      </div>
+      <div class="menu-link-container" routerLinkActive="active-link">
+        <mat-icon>perm_media</mat-icon> 
+        <a routerLink="/bookmarks" >Storage</a>  
+      </div>
       <app-menu></app-menu>
     </mat-drawer>
    
