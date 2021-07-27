@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -8,12 +9,12 @@ export class HttpService {
 
 constructor(private httpClient: HttpClient) { }
   key = 'e81e21ef77e3a9a6d01ae1c33a5344a1';
-  
+
   setQueryParams(keyword:string) {
-    return `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${this.key}&text=${keyword}}&format=json&nojsoncallback=1`
+    return `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${this.key}&text=${keyword}&format=json&nojsoncallback=1`
   }
 
-  getData(keyword:string) {
+  getData(keyword:string): Observable<any> {
     return this.httpClient.get(this.setQueryParams(keyword))
   }
 }

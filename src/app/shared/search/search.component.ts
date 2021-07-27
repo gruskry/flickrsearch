@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
+import { Component, OnInit, Output, EventEmitter} from '@angular/core';
 
 
 @Component({
@@ -12,14 +12,8 @@ export class SearchComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    // let button: any = document.querySelector('.search-button')
-    // console.log(button)
-    // debugger
-    // if(this.value !== undefined) {
-    //   button.removeAttribute('disabled')
-    // }
   }
-  
+
   sendSearchResult() {
     this.keywordEmmiter.emit(this.value)
   }

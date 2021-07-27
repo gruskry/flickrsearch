@@ -10,18 +10,17 @@ import { HttpService } from '../shared/services/http.service';
 export class DashboardComponent implements OnInit {
   totalLengthArray: any;
   page: number = 1;
-  arrayOfPhotos = []
+  arrayOfPhotos: [] = []
   constructor(private httpService: HttpService) {}
 
   ngOnInit(): void {
-    
+
   }
 
-  callRequest(event: string) {
-    this.httpService.getData(event).subscribe((data:any) => {
-      this.arrayOfPhotos = data.photos.photo
-      console.log(this.arrayOfPhotos)
-      this.totalLengthArray = this.arrayOfPhotos.length
+  callRequest(key: string) {
+    this.httpService.getData(key).subscribe((data) => {
+      this.arrayOfPhotos = data.photos?.photo
+      this.totalLengthArray = this.arrayOfPhotos?.length
     });
   }
 }

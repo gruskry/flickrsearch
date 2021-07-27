@@ -7,12 +7,12 @@ import { ContainerComponent } from './shared/container/container.component';
 import { CommonModule } from '@angular/common';
 import { SharedModule } from './shared/shared.module';
 import { AppRoutingModule } from './app-routing.module';
-import { NgxPaginationModule } from 'ngx-pagination';
+import { HttpClientModule } from '@angular/common/http';
 
 
 
 @NgModule({
-  declarations: [	
+  declarations: [
     AppComponent,
     ContainerComponent,
    ],
@@ -22,7 +22,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
     BrowserAnimationsModule,
     SharedModule,
     AppRoutingModule,
-    NgxPaginationModule
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
