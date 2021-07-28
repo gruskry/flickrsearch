@@ -1,7 +1,7 @@
 import { DataModel } from './../models/data.model';
 import { HttpService } from './http.service';
 import { HttpTestingController, HttpClientTestingModule } from '@angular/common/http/testing';
-import { TestBed, fakeAsync, async } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 
 
 describe('HttpService', () => {
@@ -10,16 +10,12 @@ describe('HttpService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [HttpService, {useValue: {getData() {return undefined} }}],
+      providers: [HttpService],
       imports: [HttpClientTestingModule],
     })
 
     httpMock = TestBed.inject(HttpTestingController);
     service = TestBed.inject(HttpService)
-  })
-
-  afterEach(() => {
-    httpMock.verify();
   })
 
   it('should be created', () => {
@@ -28,7 +24,7 @@ describe('HttpService', () => {
 
 
 
-  it('#getData',  () => {
+  it('#getData should return testData',  () => {
     const testData: DataModel = {
       photos: {
         page: 1,
@@ -52,13 +48,26 @@ describe('HttpService', () => {
     }
 
     service.getData('car').subscribe(data => {
-      expect(data.photos?.photo.length).toBe(1);
       expect(data).toEqual(testData);
     });
 
     const req = httpMock.expectOne(service.setQueryParams('car'));
-
-    expect(req.request.method).toBe('GET');
     req.flush(testData);
   })
+
+  it("#getData should throw error", () => {
+    let error: string = '';
+
+    service.getData('car').subscribe(null, e => {
+      error = e;
+    });
+
+    const req = httpMock.expectOne(service.setQueryParams('car'));
+    req.flush("Something went wrong", {
+      status: 404,
+      statusText: "Network error"
+    });
+    console.log(error)
+    expect(error).toBe('Error data. Network error ');
+  });
 })

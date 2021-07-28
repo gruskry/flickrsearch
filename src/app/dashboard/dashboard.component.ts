@@ -1,3 +1,4 @@
+import { DataModel } from './../shared/models/data.model';
 import { Component, OnInit } from '@angular/core';
 import { HttpService } from '../shared/services/http.service';
 
@@ -10,7 +11,7 @@ import { HttpService } from '../shared/services/http.service';
 export class DashboardComponent implements OnInit {
   totalLengthArray: any;
   page: number = 1;
-  arrayOfPhotos: [] = []
+  arrayOfPhotos: [] = [];
   constructor(private httpService: HttpService) {}
 
   ngOnInit(): void {
@@ -18,8 +19,8 @@ export class DashboardComponent implements OnInit {
   }
 
   callRequest(key: string) {
-    this.httpService.getData(key).subscribe((data) => {
-      this.arrayOfPhotos = data.photos?.photo
+    this.httpService.getData(key).subscribe((data: any) => {
+      this.arrayOfPhotos= data.photos?.photo
       this.totalLengthArray = this.arrayOfPhotos?.length
     });
   }

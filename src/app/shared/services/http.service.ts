@@ -1,7 +1,8 @@
 import { DataModel } from './../models/data.model';
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { Observable, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators'
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,13 @@ constructor(private httpClient: HttpClient) { }
     return `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${this.key}&text=${keyword}&format=json&nojsoncallback=1`
   }
 
-  getData(keyword:string): Observable<any> {
-    return this.httpClient.get<DataModel>(this.setQueryParams(keyword))
+  getData(keyword:string): Observable<Object> {
+    return this.httpClient.get<DataModel>(this.setQueryParams(keyword)).pipe(
+      catchError((error: HttpErrorResponse) => {
+        return throwError(
+          `Error data. ${error.statusText || "Unknown"} `
+        );
+      })
+    );
   }
 }
