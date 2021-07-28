@@ -1,3 +1,4 @@
+import { DataModel } from './../models/data.model';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -15,6 +16,6 @@ constructor(private httpClient: HttpClient) { }
   }
 
   getData(keyword:string): Observable<any> {
-    return this.httpClient.get(this.setQueryParams(keyword))
+    return this.httpClient.get<DataModel>(this.setQueryParams(keyword))
   }
 }

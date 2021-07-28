@@ -19,6 +19,7 @@ export class DashboardComponent implements OnInit {
 
   callRequest(key: string) {
     this.httpService.getData(key).subscribe((data) => {
+      console.log(data)
       this.arrayOfPhotos = data.photos?.photo
       this.totalLengthArray = this.arrayOfPhotos?.length
     });
