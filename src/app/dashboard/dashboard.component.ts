@@ -1,4 +1,5 @@
-import { DataModel } from './../shared/models/data.model';
+import { PhotosInterface } from './../shared/models/data.model';
+import { Observable } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 import { HttpService } from '../shared/services/http.service';
 
@@ -6,22 +7,21 @@ import { HttpService } from '../shared/services/http.service';
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
-  providers: [HttpService]
+  providers: [HttpService],
 })
 export class DashboardComponent implements OnInit {
   totalLengthArray: any;
   page: number = 1;
-  arrayOfPhotos: [] = [];
+  arrayOfPhotos: PhotosInterface[] | undefined;
+
   constructor(private httpService: HttpService) {}
 
   ngOnInit(): void {
-
   }
 
   callRequest(key: string) {
     this.httpService.getData(key).subscribe((data: any) => {
-      this.arrayOfPhotos= data.photos?.photo
-      this.totalLengthArray = this.arrayOfPhotos?.length
+      this.arrayOfPhotos = data.photos?.photo.map((el:object) => el)
     });
   }
 }

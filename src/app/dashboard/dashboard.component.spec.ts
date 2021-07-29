@@ -1,74 +1,79 @@
-import { SearchComponent } from './../shared/search/search.component';
+import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { DataModel } from './../shared/models/data.model';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { HttpService } from './../shared/services/http.service';
-import { ComponentFixture, TestBed, tick, fakeAsync, flush } from '@angular/core/testing';
+import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 
 import { DashboardComponent } from './dashboard.component';
-import { of } from 'rxjs'
-import { HttpClientModule } from '@angular/common/http';
+import { Observable, of } from 'rxjs';
 
 
 
 describe('DashboardComponent', () => {
-  let fixture: ComponentFixture<DashboardComponent>;
-  let fixtureSearch: ComponentFixture<SearchComponent>
   let component: DashboardComponent;
-  let searchComponent: SearchComponent;
-  let service: HttpService;
-  let spy: jasmine.Spy;
-  let mockData: any;
+  let fixture: ComponentFixture<DashboardComponent>;
+  let service: HttpService
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
+  beforeEach(async() => {
+    TestBed.configureTestingModule({
       imports: [
         RouterTestingModule,
-        HttpClientModule,
+        HttpClientTestingModule,
       ],
-      declarations: [ DashboardComponent,SearchComponent ],
-      providers: [HttpService],
+      declarations: [ DashboardComponent ],
+      providers: [ {provide: HttpService, useValue: {}} ],
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DashboardComponent)
-    fixtureSearch = TestBed.createComponent(SearchComponent)
-    component = fixture.componentInstance;
-    searchComponent = fixtureSearch.componentInstance
-    service = fixture.debugElement.injector.get(HttpService)
-    mockData = {
-      id: '2',
-      description: 'this photo',
-    }
-    spy = spyOn(service, 'getData').and.returnValue(of(mockData))
-
-  })
-
-  it('should create the DashboardComponent', () => {
     fixture = TestBed.createComponent(DashboardComponent);
-    component = fixture.debugElement.componentInstance;
-    expect(component).toBeTruthy();
-  });
+    component = fixture.componentInstance;
+    service = fixture.debugElement.injector.get(HttpService);
+  })
+  describe('#callRequest', () =>  {
+    it('arrayOfPhotos should to equal changesData', () => {
+      const response: DataModel = {
+        photos: {
+          page: 1,
+          pages: 1,
+          perpage: 1,
+          total: 2,
+          photo: [
+            { farm: 1,
+              id: '1',
+              isfamily: 1,
+              isfriend: 1,
+              ispublic: 1,
+              owner: 'string',
+              secret: 'string',
+              server: 'string',
+              title: 'string',
+            },
+          ]
+        },
+        stat: 'strings'
+      }
+      const changesData = [{
+      farm: 1,
+      id: '1',
+      isfamily: 1,
+      isfriend: 1,
+      ispublic: 1,
+      owner: 'string',
+      secret: 'string',
+      server: 'string',
+      title: 'string',
+      }];
 
-  it('should arrayOfPhotos is empty', () => {
+      spyOn(service, 'getData').and.returnValue(of(response))
 
-    if(!component.arrayOfPhotos.length) {
-      expect(component.arrayOfPhotos.length).toBe(0)
-    }
+      component.callRequest('car');
+      fixture.detectChanges();
+
+      expect(component.arrayOfPhotos).toEqual(changesData)
+    })
   })
 
-  it('should call httpService', () => {
-    component.callRequest('car');
-    expect(spy.calls.any()).toBeTruthy()
-  })
-  it('callRequest fn should be called with SearchComponent Input value', () => {
-    spyOn(component, 'callRequest')
-    const nativeElement = fixtureSearch.nativeElement;
-    const button = nativeElement.querySelector('.search-button');
-    button.dispatchEvent(new Event('click'));
-    fixture.detectChanges();
-    component.callRequest(searchComponent.value)
-    expect(component.callRequest).toHaveBeenCalledWith(searchComponent.value)
-  })
 });

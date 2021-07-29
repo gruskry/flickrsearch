@@ -13,7 +13,7 @@ export class CardComponent implements OnInit {
 
   ngOnInit() {
   }
- 
+
   saveToLocalStorage() {
     localStorage.setItem(this.item.id, `https://live.staticflickr.com/${this.item.server}/${this.item.id}_${this.item.secret}.jpg`)
     this._snackBar.open('Your card was saved','Close', {
@@ -21,6 +21,6 @@ export class CardComponent implements OnInit {
     });
   }
 
-  
-  
+
+
 }

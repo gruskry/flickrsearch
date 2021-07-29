@@ -16,11 +16,11 @@ constructor(private httpClient: HttpClient) { }
     return `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${this.key}&text=${keyword}&format=json&nojsoncallback=1`
   }
 
-  getData(keyword:string): Observable<Object> {
+  getData(keyword:string): Observable<DataModel> {
     return this.httpClient.get<DataModel>(this.setQueryParams(keyword)).pipe(
       catchError((error: HttpErrorResponse) => {
         return throwError(
-          `Error data. ${error.statusText || "Unknown"} `
+          `Error data. ${error.statusText || "Unknown"}`
         );
       })
     );

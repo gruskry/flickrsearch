@@ -6,7 +6,7 @@ import { Component, Input, OnInit  } from '@angular/core';
   styleUrls: ['./bookmarks.component.scss']
 })
 export class BookmarksComponent implements OnInit {
-  @Input() item : any;
+  // @Input() item : any;
   public savedCards:string[] = [];
   constructor() { }
 
@@ -15,8 +15,8 @@ export class BookmarksComponent implements OnInit {
       let url:any = localStorage.getItem(id)
       this.savedCards.push(url)
     });
-    
-  } 
+
+  }
 
   removeCard(cardUrl: any) {
     Object.keys(localStorage).map((id)=>{

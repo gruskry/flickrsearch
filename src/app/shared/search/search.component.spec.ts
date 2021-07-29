@@ -16,27 +16,32 @@ describe('SearchComponent', () => {
 
     expect(component).toBeTruthy();
   });
+  describe('#keywordEmmiter', () => {
+    it('emitter should call with value', () => {
 
-  it('should emit have been called with value', () => {
+      spyOn(component.keywordEmmiter, 'emit');
 
-    spyOn(component.keywordEmmiter, 'emit');
+      const nativeElement = fixture.nativeElement;
+      const button = nativeElement.querySelector('.search-button');
+      button.dispatchEvent(new Event('click'));
+      fixture.detectChanges();
 
-    const nativeElement = fixture.nativeElement;
-    const button = nativeElement.querySelector('.search-button');
-    button.dispatchEvent(new Event('click'));
-    fixture.detectChanges();
+      expect(component.keywordEmmiter.emit).toHaveBeenCalledWith(component.value)
 
-    expect(component.keywordEmmiter.emit).toHaveBeenCalledWith(component.value)
+    })
 
+    it('should emit value ', () => {
+      const nativeElement = fixture.nativeElement;
+      const button = nativeElement.querySelector('.search-button');
+      const input = nativeElement.querySelector('.search-input');
+      const value = input.getAttribute('value')
+
+      button.dispatchEvent(new Event('click'));
+      fixture.detectChanges();
+
+      expect(component.keywordEmmiter.emit(value)).toBe(component.value)
+    })
   })
 
-  it('should emit value ', () => {
-    const nativeElement = fixture.nativeElement;
-    const button = nativeElement.querySelector('.search-button');
-    button.dispatchEvent(new Event('click'));
-    fixture.detectChanges();
-
-    expect(component.keywordEmmiter.emit(component.value)).toBe(component.value)
-  })
 
 })
