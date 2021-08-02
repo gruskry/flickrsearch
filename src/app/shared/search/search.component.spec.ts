@@ -16,30 +16,18 @@ describe('SearchComponent', () => {
 
     expect(component).toBeTruthy();
   });
-  describe('#keywordEmmiter', () => {
-    it('emitter should call with value', () => {
-
-      spyOn(component.keywordEmmiter, 'emit');
-
-      const nativeElement = fixture.nativeElement;
-      const button = nativeElement.querySelector('.search-button');
-      button.dispatchEvent(new Event('click'));
+  describe('#sendSearchResult', () => {
+    it('test arr shouldn`t is empty', () => {
+      debugger
+      let arr = []
+      spyOn(component.keywordEmmiter, 'emit').and.callFake(() => {
+        arr.push('1')
+      })
+      component.sendSearchResult()
       fixture.detectChanges();
 
-      expect(component.keywordEmmiter.emit).toHaveBeenCalledWith(component.value)
+      expect(arr.length).toBe(1)
 
-    })
-
-    it('should emit value ', () => {
-      const nativeElement = fixture.nativeElement;
-      const button = nativeElement.querySelector('.search-button');
-      const input = nativeElement.querySelector('.search-input');
-      const value = input.getAttribute('value')
-
-      button.dispatchEvent(new Event('click'));
-      fixture.detectChanges();
-
-      expect(component.keywordEmmiter.emit(value)).toBe(component.value)
     })
   })
 

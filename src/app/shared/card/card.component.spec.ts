@@ -32,14 +32,16 @@ describe('CardComponent', () => {
         server: 'string',
         title: 'string',
       };
-
+      let storage = {}
       component.item = data
-
-      let link = `https://live.staticflickr.com/${component.item.server}/${component.item.id}_${component.item.secret}.jpg`
+      let link = {'10': '2'}
+      spyOn(localStorage, 'setItem').and.callFake(() => {
+        return storage = {'10': '2'}
+      })
       component.saveToLocalStorage();
       fixture.detectChanges()
 
-      expect(localStorage.getItem(`${data.id}`)).toEqual(link)
+      expect(storage).toEqual(link)
 
     })
   })

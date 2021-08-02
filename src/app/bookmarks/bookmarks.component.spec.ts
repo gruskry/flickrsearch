@@ -3,7 +3,7 @@ import { BookmarksComponent } from './bookmarks.component';
 describe('BookmarksComponent', () => {
   let component: BookmarksComponent;
   let fixture: ComponentFixture<BookmarksComponent>
-
+  let storage;
   beforeEach(async () => {
     TestBed.configureTestingModule({
       declarations:[BookmarksComponent],
@@ -13,19 +13,18 @@ describe('BookmarksComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(BookmarksComponent)
     component = fixture.componentInstance;
+    localStorage.clear()
   })
 
   it('array savedCards shouldn`t is empty', () => {
-    localStorage.clear()
-    localStorage.setItem('1', '2')
+    spyOn(localStorage, 'getItem').and.callFake(() => 'local')
     fixture.detectChanges()
-    expect(component.savedCards.length).toBe(1);
+    expect(component.savedCards).toEqual(['local']);
   })
 
   describe('#removeCard', () => {
     it('localStorage and array savedCards should be is empty', () => {
-      localStorage.clear()
-      localStorage.setItem('1', '2')
+      spyOn(localStorage, 'getItem').and.callFake(() => '2');
       fixture.detectChanges()
       component.removeCard('2')
       expect(localStorage.length).toBe(0)

@@ -15,6 +15,7 @@ export class SearchComponent implements OnInit {
   }
 
   sendSearchResult() {
+    debugger
     this.keywordEmmiter.emit(this.value)
   }
 }
