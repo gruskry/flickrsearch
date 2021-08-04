@@ -6,7 +6,6 @@ import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatSidenavModule } from '@angular/material/sidenav';
-import { DashboardComponent } from '../dashboard/dashboard.component';
 import { CardComponent } from './card/card.component';
 import { MenuComponent } from './menu/menu.component';
 import { SearchComponent } from './search/search.component';
